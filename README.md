@@ -20,19 +20,30 @@ on:
   workflow_dispatch:
 
 jobs:
-  maintain-streak:
+  auto-streak:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
     steps:
-      - name: Checkout code
+      - name: Checkout Repository
         uses: actions/checkout@v3
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20"
+
+      - name: Install Dependencies
+        run: npm install
+
       - name: Run Auto-Streak Keeper
-        uses: <username>/auto-streak-keeper@v1
+        uses: bmiit145/auto-streak-keeper@v1.0.0
         with:
           file-path: "public/auto-streak/data.txt"
           min-commits: 3
           max-commits: 10
-          commit-message: "Daily streak update"
+          commit-message: "Daily streak maintenance"
 ```
 
 ### **4. Test the Action**

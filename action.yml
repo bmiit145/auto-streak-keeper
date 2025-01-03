@@ -21,7 +21,10 @@ inputs:
 
 runs:
   using: "node20"
+  pre: npm install
   main: "index.js"
+
+
 branding:
   color: "green"
   icon: "flame"

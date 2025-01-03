@@ -11,10 +11,7 @@ async function run() {
     execSync("git config --global user.email 'github-actions[bot]@users.noreply.github.com'");
     execSync("git clone $GITHUB_REPOSITORY .");
 
-    // Step 2: Install dependencies
-    console.log("Installing dependencies...");
-    execSync("npm install");
-
+    
     // Step 3: Inputs
     const filePath = core.getInput("file-path") || "public/auto-streak/data.txt";
     const minCommits = parseInt(core.getInput("min-commits") || 1);

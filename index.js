@@ -27,6 +27,8 @@ async function run() {
       console.log(`Updated file: ${filePath} - ${content.trim()}`);
 
       // Commit each change
+      execSync("git config --global user.name 'github-actions[bot]'");
+      execSync("git config --global user.email 'github-actions[bot]@users.noreply.github.com'");
       execSync(`git add ${filePath}`);
       execSync(`git commit -m "${commitMessage} - Update ${i + 1}"`);
     }

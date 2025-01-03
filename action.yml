@@ -21,7 +21,8 @@ inputs:
 
 runs:
   using: "node20"
-  main: "index.js"
+  # main: "index.js"
+  main: "dist/index.js"
 
 branding:
   icon: 'git-pull-request'

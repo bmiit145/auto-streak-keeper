@@ -17,22 +17,36 @@ Auto-Streak Keeper is a GitHub Action designed to help maintain your GitHub stre
    ```yaml
    name: Auto-Streak Keeper
 
-   on:
-     schedule:
-       - cron: "0 0 * * *" # Runs daily at midnight
-     workflow_dispatch:
+    on:
+      schedule:
+        - cron: "0 0 * * *" # Runs daily at midnight
+      workflow_dispatch:
 
-   jobs:
-     auto-streak:
-       runs-on: ubuntu-latest
-       steps:
-         - name: Run Auto-Streak Keeper
-           uses: bmiit45/auto-streak-keeper@v1.0.0
-           with:
-             file-path: "public/auto-streak/data.txt"
-             min-commits: 3
-             max-commits: 10
-             commit-message: "Daily streak maintenance"
+    jobs:
+      auto-streak:
+        runs-on: ubuntu-latest
+        permissions:
+          contents: write
+
+        steps:
+          - name: Checkout Repository
+            uses: actions/checkout@v3
+
+          - name: Set up Node.js
+            uses: actions/setup-node@v3
+            with:
+              node-version: "20"
+
+          - name: Install Dependencies
+            run: npm install
+
+          - name: Run Auto-Streak Keeper
+            uses: bmiit145/auto-streak-keeper@v1.0.0
+            with:
+              file-path: "public/auto-streak/data.txt"
+              min-commits: 3
+              max-commits: 10
+              commit-message: "Daily streak maintenance"
    ```
 2. Push the workflow and let the action take care of maintaining your GitHub streak!
 

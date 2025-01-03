@@ -21,7 +21,7 @@ inputs:
 
 runs:
   using: "node20"
-  pre: "npm install"
+  pre: npm install
   main: "index.js"
 
 branding:

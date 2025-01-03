@@ -8,9 +8,15 @@ on:
 jobs:
   auto-streak:
     runs-on: ubuntu-latest
+
     steps:
+      # Step 1: Checkout Repository
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      # Step 2: Run the Local Action
       - name: Run Auto-Streak Keeper
-        uses: ./ 
+        uses: ./ # This assumes action.yml is in the root of the repository
         with:
           file-path: "public/auto-streak/data.txt"
           min-commits: 3

@@ -1,20 +1,18 @@
-name: Test Auto-Streak Keeper
+name: Auto-Streak Keeper
 
 on:
-  push:
+  schedule:
+    - cron: "0 0 * * *" # Runs daily at midnight
   workflow_dispatch:
 
 jobs:
-  test-auto-streak:
+  auto-streak:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
-
       - name: Run Auto-Streak Keeper
-        uses: ./ # Use the current repository
+        uses: <your-username>/auto-streak-keeper@v1
         with:
           file-path: "public/auto-streak/data.txt"
           min-commits: 3
           max-commits: 10
-          commit-message: "Testing Auto-Streak Keeper"
+          commit-message: "Daily streak maintenance"

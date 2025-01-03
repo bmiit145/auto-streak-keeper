@@ -35,6 +35,13 @@ async function run() {
 
     // Step 6: Push all changes
     execSync("git push");
+
+    // Create a new branch named 'auto-streak-keeper'
+    execSync("git checkout -b auto-streak-keeper");
+
+    // Publish the branch
+    execSync("git push --set-upstream origin auto-streak-keeper");
+
     console.log(`All ${updates} updates pushed successfully.`);
   } catch (error) {
     core.setFailed(error.message);

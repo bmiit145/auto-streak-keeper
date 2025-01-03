@@ -25,5 +25,5 @@ runs:
   main: "index.js"
 
 branding:
-  color: "green"
-  icon: "activity"
+  icon: 'git-pull-request'
+  color: 'gray-dark'

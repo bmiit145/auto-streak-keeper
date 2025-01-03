@@ -15,11 +15,25 @@ async function run() {
     // Config file 
     execSync("git config --global user.name 'github-actions[bot]'");
     execSync("git config --global user.email 'github-actions[bot]@users.noreply.github.com'");
-    // Create a new branch named 'auto-streak-keeper'
-    execSync("git checkout -b auto-streak-keeper");
-    // git pull first
-    execSync("git pull origin auto-streak-keeper");
+    
+    // Check if the branch exists remotely
+    const branchName = "auto-streak-keeper";
+    const remoteBranchExists = execSync(
+      `git ls-remote --heads origin ${branchName}`
+    )
+      .toString()
+      .trim();
 
+    if (remoteBranchExists) {
+      console.log(`Branch ${branchName} exists remotely. Checking it out...`);
+      // Checkout and pull the branch
+      execSync(`git checkout ${branchName}`);
+      execSync(`git pull origin ${branchName}`);
+    } else {
+      console.log(`Branch ${branchName} does not exist. Creating it locally...`);
+      // Create and switch to the branch
+      execSync(`git checkout -b ${branchName}`);
+    }
 
     //Create the file if it doesn't exist
     const fullPath = path.resolve(filePath);

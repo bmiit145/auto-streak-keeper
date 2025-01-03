@@ -17,6 +17,8 @@ async function run() {
     execSync("git config --global user.email 'github-actions[bot]@users.noreply.github.com'");
     // Create a new branch named 'auto-streak-keeper'
     execSync("git checkout -b auto-streak-keeper");
+    // git pull first
+    execSync("git pull origin auto-streak-keeper");
 
 
     //Create the file if it doesn't exist

@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Run Auto-Streak Keeper
-        uses: <your-username>/auto-streak-keeper@v1
+        uses: ./ 
         with:
           file-path: "public/auto-streak/data.txt"
           min-commits: 3

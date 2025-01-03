@@ -1,0 +1,27 @@
+name: "Auto-Streak Keeper"
+description: "Maintains GitHub streak by creating and updating a file daily."
+author: "priyank sutariya"
+inputs:
+  file-path:
+    description: "Path to the file to create/update"
+    required: false
+    default: "public/auto-streak/data.txt"
+  min-commits:
+    description: "Minimum number of commits daily"
+    required: false
+    default: 1
+  max-commits:
+    description: "Maximum number of commits daily"
+    required: false
+    default: 15
+  commit-message:
+    description: "Commit message for the update"
+    required: false
+    default: "Auto-streak update"
+
+runs:
+  using: "node20"
+  main: "index.js"
+branding:
+  color: "green"
+  icon: "flame"

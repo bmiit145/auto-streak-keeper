@@ -2,71 +2,94 @@
 
 A GitHub Action to automatically maintain GitHub streaks by creating and updating a file multiple times daily.
 
-## Inputs
+---
 
-- `file-path` (optional): Path to the file to create/update. Default: `public/auto-streak/data.txt`.
-- `min-commits` (optional): Minimum number of commits daily. Default: `1`.
-- `max-commits` (optional): Maximum number of commits daily. Default: `15`.
-- `commit-message` (optional): Commit message for the updates. Default: `Auto-streak update`.
+## **For Developers: Deployment Steps**
 
-## Example Usage
+### **Before Publishing**
+Follow these steps to prepare and release a new version of the **Auto-Streak Keeper** action:
+
+1. **Install Dependencies**:
+   Ensure you have the required dependencies installed:
+   ```bash
+   npm install
+   ```
+
+2. **Bundle Dependencies**:
+   Use `@vercel/ncc` to bundle all dependencies into a single file for distribution:
+   ```bash
+   npx @vercel/ncc build index.js --license licenses.txt
+   ```
+
+3. **Update `action.yml`**:
+   Ensure the `main` field in `action.yml` points to the bundled file:
+   ```yaml
+   runs:
+     using: "node20"
+     main: "dist/index.js"
+   ```
+---
+
+## **Inputs**
+
+- **`file-path`** (optional): Path to the file to create/update. Default: `public/auto-streak/data.txt`.
+- **`min-commits`** (optional): Minimum number of commits daily. Default: `1`.
+- **`max-commits`** (optional): Maximum number of commits daily. Default: `15`.
+- **`commit-message`** (optional): Commit message for the updates. Default: `Auto-streak update`.
+
+---
+
+## **Example Usage**
 
 ```yaml
 name: Maintain GitHub Streak
 
 on:
- schedule:
-   - cron: "0 0 * * *" # Runs daily at midnight
- workflow_dispatch:
+  schedule:
+    - cron: "0 0 * * *" # Runs daily at midnight
+  workflow_dispatch:
 
 jobs:
- auto-streak:
-   runs-on: ubuntu-latest
-   permissions:
-     contents: write
+  auto-streak:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
-   steps:
-     - name: Checkout Repository
-       uses: actions/checkout@v3
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
 
-     - name: Set up Node.js
-       uses: actions/setup-node@v3
-       with:
-         node-version: "20"
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20"
 
-     - name: Run Auto-Streak Keeper
-       uses: bmiit145/auto-streak-keeper@v1.0.1
-       with:
-         file-path: "public/auto-streak/data.txt"
-         min-commits: 2
-         max-commits: 5
-         commit-message: "Daily streak maintenance"
+      - name: Run Auto-Streak Keeper
+        uses: bmiit145/auto-streak-keeper@v1.0.1
+        with:
+          file-path: "public/auto-streak/data.txt"
+          min-commits: 2
+          max-commits: 5
+          commit-message: "Daily streak maintenance"
 ```
 
-### **4. Test the Action**
-1. **Create a `.github/workflows` folder** in a test repository.
+---
+
+## **Testing the Action**
+
+1. Create a `.github/workflows` folder in a test repository.
 2. Add a workflow YAML file (e.g., `auto-streak.yml`).
-3. Push the changes and verify the action.
+3. Push the changes and verify the action works as expected.
 
 ---
 
-### **5. Publish to GitHub Marketplace**
-1. **Create a Release**:
-   - Go to the repository’s **Releases** section.
-   - Draft a new release with a tag (e.g., `v1.0.0`) and publish it.
+## **Publishing Updates**
+To publish a new version of the **Auto-Streak Keeper** action:
 
-2. **Submit to Marketplace**:
-   - Go to the repository settings.
-   - Under **Actions**, click **Public Actions** and **Submit to GitHub Marketplace**.
-   - Provide details and categories for your action.
-   - Submit for review.
+1. Follow the **deployment steps** above.
+2. Increment the version tag (e.g., `v1.0.1 -> v1.0.2`).
+3. Update the action version in any workflows using it.
 
 ---
 
-### **6. Improve and Update**
-- Add custom features based on user feedback.
-- Update the action and publish new versions.
-
----
-
-This setup ensures that the **Auto-Streak Keeper** action is ready for users to integrate and maintain their GitHub streaks seamlessly. Let me know if you need assistance with any specific step!
+This ensures the **Auto-Streak Keeper** is not only user-ready but also easy for developers to maintain and enhance. Let me know if you need further adjustments!

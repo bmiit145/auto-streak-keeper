@@ -5,13 +5,6 @@ const path = require("path");
 
 async function run() {
   try {
-    // Step 1: Checkout the repository
-    console.log("Checking out repository...");
-    execSync("git config --global user.name 'github-actions[bot]'");
-    execSync("git config --global user.email 'github-actions[bot]@users.noreply.github.com'");
-    execSync("git clone $GITHUB_REPOSITORY .");
-
-    
     // Step 3: Inputs
     const filePath = core.getInput("file-path") || "public/auto-streak/data.txt";
     const minCommits = parseInt(core.getInput("min-commits") || 1);

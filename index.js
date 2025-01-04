@@ -18,23 +18,38 @@ async function run() {
     
     // Check if the branch exists remotely
     const branchName = "auto-streak-keeper";
-    const remoteBranchExists = execSync(
-      `git ls-remote --heads origin ${branchName}`
-    )
-      .toString()
-      .trim();
-
-      execSync(`git checkout -b ${branchName}`);
+    try {
+      const remoteBranchExists = execSync(
+        `git ls-remote --heads origin ${branchName}`
+      )
+        .toString()
+        .trim();
+    
       if (remoteBranchExists) {
         console.log(`Branch ${branchName} exists remotely.`);
+
+        // Fetch the branch explicitly from the remote
+        execSync(`git fetch origin ${branchName}`);
         // Checkout and set up the branch to track the remote
-        execSync(`git pull`);
+        execSync(`git checkout -b ${branchName} --track origin/${branchName}`);
+      } 
+      else {
+        console.log(`Branch ${branchName} does not exist remotely. Creating it locally...`);
+        // Create and switch to the branch locally
+        execSync(`git checkout -b ${branchName}`);
+        // console.log("Adding initial commit...");
+        // fs.writeFileSync("README.md", "Initial commit for auto-streak-keeper");
+        // execSync(`git add README.md`);
+        // execSync(`git commit -m "Initial commit for auto-streak-keeper"`);
+        // // Push the branch to the remote and set up tracking
+        // execSync(`git push --set-upstream origin ${branchName}`);
+      }
+    } catch (error) {
+      console.error(`Branch handling failed: ${error.message}`);
+      core.setFailed(`Error handling branch ${branchName}: ${error.message}`);
+      throw error;
     }
-    // else {
-    //   console.log(`Branch ${branchName} does not exist. Creating it locally...`);
-    //   // Create and switch to the branch
-    //   execSync(`git checkout -b ${branchName}`);
-    // }
+
 
     //Create the file if it doesn't exist
     const fullPath = path.resolve(filePath);

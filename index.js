@@ -24,17 +24,17 @@ async function run() {
       .toString()
       .trim();
 
+      execSync(`git checkout -b ${branchName}`);
       if (remoteBranchExists) {
         console.log(`Branch ${branchName} exists remotely. Checking it out...`);
         // Checkout and set up the branch to track the remote
-        execSync(`git checkout -b ${branchName} --track origin/${branchName}`);
         execSync(`git pull`);
     }
-    else {
-      console.log(`Branch ${branchName} does not exist. Creating it locally...`);
-      // Create and switch to the branch
-      execSync(`git checkout -b ${branchName}`);
-    }
+    // else {
+    //   console.log(`Branch ${branchName} does not exist. Creating it locally...`);
+    //   // Create and switch to the branch
+    //   execSync(`git checkout -b ${branchName}`);
+    // }
 
     //Create the file if it doesn't exist
     const fullPath = path.resolve(filePath);

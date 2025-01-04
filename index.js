@@ -13,6 +13,7 @@ async function run() {
     const userName = core.getInput("user-name");
     const userEmail = core.getInput("user-email");
     const githubToken = core.getInput("github-token");
+    const branchName = core.getInput("branch-name") || "main";
 
     // Validate github-token
     if (!githubToken) {
@@ -25,7 +26,6 @@ async function run() {
     execSync(`git config --global user.email '${userEmail}'`);
     
     // Check if the branch exists remotely
-    const branchName = "auto-streak-keeper";
     try {
       const remoteBranchExists = execSync(
         `git ls-remote --heads origin ${branchName}`
@@ -45,12 +45,6 @@ async function run() {
         console.log(`Branch ${branchName} does not exist remotely. Creating it locally...`);
         // Create and switch to the branch locally
         execSync(`git checkout -b ${branchName}`);
-        // console.log("Adding initial commit...");
-        // fs.writeFileSync("README.md", "Initial commit for auto-streak-keeper");
-        // execSync(`git add README.md`);
-        // execSync(`git commit -m "Initial commit for auto-streak-keeper"`);
-        // // Push the branch to the remote and set up tracking
-        // execSync(`git push --set-upstream origin ${branchName}`);
       }
     } catch (error) {
       console.error(`Branch handling failed: ${error.message}`);
@@ -81,7 +75,7 @@ async function run() {
 
     // Publish the branch
     try {
-      execSync(`git push https://${userName}:${githubToken}@github.com/${process.env.GITHUB_REPOSITORY}.git auto-streak-keeper`);
+      execSync(`git push https://${userName}:${githubToken}@github.com/${process.env.GITHUB_REPOSITORY}.git ${branchName}`);
       console.log(`All ${updates} updates pushed successfully.`);
     } catch (error) {
       core.setFailed(`Error pushing updates: ${error.message}`);

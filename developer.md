@@ -39,7 +39,7 @@ Follow these steps to prepare and release a new version of the **Auto-Streak Kee
 - **`user-name`**: GitHub username. Default: `${{ secrets.GITHUB_USER_NAME }}`.
 - **`user-email`**: GitHub user email. Default: `${{ secrets.GITHUB_USER_EMAIL }}`.
 - **`github-token`**: GitHub token. Default: `${{ secrets.GITHUB_TOKEN }}`.
-
+- **`branch-name`** (optional): Branch name to push the updates. Default: `main`.
 
 you can set a secrets at repo setting. 
 ---
@@ -79,6 +79,7 @@ jobs:
           user-name: ${{ secrets.GITHUB_USER_NAME }}
           user-email: ${{ secrets.GITHUB_USER_EMAIL }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
+          branch-name: "main"
 ```
 
 ---

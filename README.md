@@ -12,6 +12,21 @@ Auto-Streak Keeper is a GitHub Action designed to help maintain your GitHub stre
   - Validates and pulls the branch if it already exists remotely.
 - **GitHub Streak Maintenance**: Ensures daily activity to maintain your streak with minimal effort.
 
+## **Inputs**
+
+- **`file-path`** (optional): Path to the file to create/update. Default: `public/auto-streak/data.txt`.
+- **`min-commits`** (optional): Minimum number of commits daily. Default: `1`.
+- **`max-commits`** (optional): Maximum number of commits daily. Default: `15`.
+- **`commit-message`** (optional): Commit message for the updates. Default: `Auto-streak update`.
+- **`user-name`**: GitHub username. Default: `${{ secrets.GITHUB_USER_NAME }}`.
+- **`user-email`**: GitHub user email. Default: `${{ secrets.GITHUB_USER_EMAIL }}`.
+- **`github-token`**: GitHub token. Default: `${{ secrets.GITHUB_TOKEN }}`.
+
+
+you can set a secrets at repo setting. 
+
+---
+
 ### **How to Use**
 1. Add the action to your workflow:
    ```yaml
@@ -44,6 +59,9 @@ Auto-Streak Keeper is a GitHub Action designed to help maintain your GitHub stre
             min-commits: 2
             max-commits: 5
             commit-message: "Daily streak maintenance"
+            user-name: ${{ secrets.GITHUB_USER_NAME }}
+            user-email: ${{ secrets.GITHUB_USER_EMAIL }}
+            github-token: ${{ secrets.GITHUB_TOKEN }}
    ```
 2. Push the workflow and let the action take care of maintaining your GitHub streak!
 

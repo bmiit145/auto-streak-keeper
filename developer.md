@@ -36,7 +36,12 @@ Follow these steps to prepare and release a new version of the **Auto-Streak Kee
 - **`min-commits`** (optional): Minimum number of commits daily. Default: `1`.
 - **`max-commits`** (optional): Maximum number of commits daily. Default: `15`.
 - **`commit-message`** (optional): Commit message for the updates. Default: `Auto-streak update`.
+- **`user-name`**: GitHub username. Default: `${{ secrets.GITHUB_USER_NAME }}`.
+- **`user-email`**: GitHub user email. Default: `${{ secrets.GITHUB_USER_EMAIL }}`.
+- **`github-token`**: GitHub token. Default: `${{ secrets.GITHUB_TOKEN }}`.
 
+
+you can set a secrets at repo setting. 
 ---
 
 ## **Example Usage**
@@ -71,6 +76,9 @@ jobs:
           min-commits: 2
           max-commits: 5
           commit-message: "Daily streak maintenance"
+          user-name: ${{ secrets.GITHUB_USER_NAME }}
+          user-email: ${{ secrets.GITHUB_USER_EMAIL }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 ---

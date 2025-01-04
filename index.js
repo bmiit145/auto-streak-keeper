@@ -26,9 +26,9 @@ async function run() {
 
     if (remoteBranchExists) {
       console.log(`Branch ${branchName} exists remotely. Checking it out...`);
-      // Checkout and pull the branch
-      execSync(`git checkout ${branchName}`);
-      execSync(`git pull origin ${branchName}`);
+      // Checkout and set up the branch to track the remote
+      execSync(`git checkout -b ${branchName} --track origin/${branchName}`);
+      execSync(`git pull`);
     } else {
       console.log(`Branch ${branchName} does not exist. Creating it locally...`);
       // Create and switch to the branch

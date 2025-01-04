@@ -39,7 +39,7 @@ async function run() {
         // Fetch the branch explicitly from the remote
         execSync(`git fetch origin ${branchName}`);
         // Checkout and set up the branch to track the remote
-        execSync(`git checkout -b ${branchName} --track origin/${branchName}`);
+        execSync(`git checkout ${branchName}`);
       } 
       else {
         console.log(`Branch ${branchName} does not exist remotely. Creating it locally...`);

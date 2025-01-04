@@ -18,10 +18,18 @@ inputs:
     description: "Commit message for the update"
     required: false
     default: "Auto-streak update"
+  user-name:
+    description: "User name for the commit"
+    required: true
+  user-email:
+    description: "User email for the commit"
+    required: true
+  github-token:
+    description: "GitHub token for authentication"
+    required: true
 
 runs:
   using: "node20"
-  # main: "index.js"
   main: "dist/index.js"
 
 branding:

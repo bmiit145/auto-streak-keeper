@@ -27551,11 +27551,19 @@ async function run() {
     const minCommits = parseInt(core.getInput("min-commits") || 1);
     const maxCommits = parseInt(core.getInput("max-commits") || 15);
     const commitMessage = core.getInput("commit-message") || "Auto-streak update";
+    const userName = core.getInput("user-name");
+    const userEmail = core.getInput("user-email");
+    const githubToken = core.getInput("github-token");
 
+    // Validate github-token
+    if (!githubToken) {
+      core.setFailed("GitHub token not found. Please provide a valid token.");
+      return;
+    }
 
     // Config file 
-    execSync("git config --global user.name 'github-actions[bot]'");
-    execSync("git config --global user.email 'github-actions[bot]@users.noreply.github.com'");
+    execSync(`git config --global user.name '${userName}'`);
+    execSync(`git config --global user.email '${userEmail}'`);
     
     // Check if the branch exists remotely
     const branchName = "auto-streak-keeper";
@@ -27612,11 +27620,14 @@ async function run() {
       execSync(`git commit -m "${commitMessage} - Update ${i + 1}"`);
     }
 
-
     // Publish the branch
-    execSync("git push --set-upstream origin auto-streak-keeper");
-
-    console.log(`All ${updates} updates pushed successfully.`);
+    try {
+      execSync(`git push https://${userName}:${githubToken}@github.com/${process.env.GITHUB_REPOSITORY}.git auto-streak-keeper`);
+      console.log(`All ${updates} updates pushed successfully.`);
+    } catch (error) {
+      core.setFailed(`Error pushing updates: ${error.message}`);
+      throw error;
+    }
   } catch (error) {
     core.setFailed(error.message);
   }

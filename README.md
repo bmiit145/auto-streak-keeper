@@ -1,4 +1,3 @@
-
 ### **What's New**
 Auto-Streak Keeper is a GitHub Action designed to help maintain your GitHub streak by automating file creation, updates, and commits on a daily schedule. This initial release includes:
 
@@ -21,7 +20,7 @@ Auto-Streak Keeper is a GitHub Action designed to help maintain your GitHub stre
 - **`user-name`**: GitHub username. Default: `${{ secrets.GITHUB_USER_NAME }}`.
 - **`user-email`**: GitHub user email. Default: `${{ secrets.GITHUB_USER_EMAIL }}`.
 - **`github-token`**: GitHub token. Default: `${{ secrets.GITHUB_TOKEN }}`.
-
+- **`branch-name`** (optional): Branch name to push the updates. Default: `main`.
 
 you can set a secrets at repo setting. 
 
@@ -62,6 +61,7 @@ you can set a secrets at repo setting.
             user-name: ${{ secrets.GITHUB_USER_NAME }}
             user-email: ${{ secrets.GITHUB_USER_EMAIL }}
             github-token: ${{ secrets.GITHUB_TOKEN }}
+            branch-name: "main"
    ```
 2. Push the workflow and let the action take care of maintaining your GitHub streak!
 

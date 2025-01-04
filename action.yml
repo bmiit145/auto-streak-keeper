@@ -27,6 +27,10 @@ inputs:
   github-token:
     description: "GitHub token for authentication"
     required: true
+  branch-name:
+    description: "Branch name to push the updates"
+    required: false
+    default: "auto-streak-keeper"
 
 runs:
   using: "node20"

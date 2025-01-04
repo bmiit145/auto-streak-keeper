@@ -27567,7 +27567,7 @@ async function run() {
 
       execSync(`git checkout -b ${branchName}`);
       if (remoteBranchExists) {
-        console.log(`Branch ${branchName} exists remotely. Checking it out...`);
+        console.log(`Branch ${branchName} exists remotely.`);
         // Checkout and set up the branch to track the remote
         execSync(`git pull`);
     }

@@ -72,8 +72,8 @@ async function run() {
       execSync(`git add ${filePath}`);
       execSync(`git commit -m "${commitMessage} - Update ${i + 1}"`);
 
-      // Add random delay between 1 to 5 seconds
-      const delay = Math.floor(Math.random() * 5000) + 1000;
+      // Add random delay between 2 to 5 seconds
+      const delay = Math.floor(Math.random() * 5000) + 2000;
       await new Promise(resolve => setTimeout(resolve, delay));
     }
 

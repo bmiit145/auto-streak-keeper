@@ -10,6 +10,7 @@ Auto-Streak Keeper is a GitHub Action designed to help maintain your GitHub stre
   - Creates and pushes updates to a dedicated branch (`auto-streak-keeper`).
   - Validates and pulls the branch if it already exists remotely.
 - **GitHub Streak Maintenance**: Ensures daily activity to maintain your streak with minimal effort.
+- **Random Delay Between Commits**: Adds a random delay between 1 to 5 seconds after each commit to prevent bot detection.
 
 ## **Inputs**
 

@@ -102,3 +102,9 @@ To publish a new version of the **Auto-Streak Keeper** action:
 ---
 
 This ensures the **Auto-Streak Keeper** is not only user-ready but also easy for developers to maintain and enhance. Let me know if you need further adjustments!
+
+---
+
+## **Random Delay Between Commits**
+
+To prevent bot detection on GitHub, a random delay between 1 to 5 seconds is added after each commit. This makes the commit activity appear more human-like and avoids triggering GitHub's bot detection mechanisms.
